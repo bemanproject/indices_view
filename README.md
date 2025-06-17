@@ -1,24 +1,18 @@
-# beman.exemplar: A Beman Library Exemplar
+# beman.indices_view: A range adaptor that generates a sequence of integers from $0$ to $n - 1$
 
 <!--
 SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 -->
 
 <!-- markdownlint-disable-next-line line-length -->
-![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg) ![Continuous Integration Tests](https://github.com/bemanproject/exemplar/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/exemplar/actions/workflows/pre-commit.yml/badge.svg)
+![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg) ![Continuous Integration Tests](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit.yml/badge.svg)
 
-`beman.exemplar` is a minimal C++ library conforming to [The Beman Standard](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_STANDARD.md).
-This can be used as a template for those intending to write Beman libraries.
-It may also find use as a minimal and modern  C++ project structure.
-
-**Implements**: `std::identity` proposed in [Standard Library Concepts (P0898R3)](https://wg21.link/P0898R3).
+**Implements**: `std::views::indices` proposed in [Add std::views::indices(n) (P3060R2)](https://wg21.link/P3060R2).
 
 **Status**: [Under development and not yet ready for production use.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#under-development-and-not-yet-ready-for-production-use)
 
 ## Usage
 
-`std::identity` is a function object type whose `operator()` returns its argument unchanged.
-`std::identity` serves as the default projection in constrained algorithms.
 Its direct usage is usually not needed.
 
 ### Usage: default projection in constrained algorithms
@@ -26,6 +20,7 @@ Its direct usage is usually not needed.
 The following code snippet illustrates how we can achieve a default projection using `beman::exemplar::identity`:
 
 ```cpp
+// TODO: Update example
 #include <beman/exemplar/identity.hpp>
 
 namespace exe = beman::exemplar;
@@ -75,7 +70,6 @@ int main()
 
     return 0;
 }
-
 ```
 
 Full runnable examples can be found in [`examples/`](examples/).
@@ -86,33 +80,13 @@ Full runnable examples can be found in [`examples/`](examples/).
 
 This project requires at least the following to build:
 
-* C++17
+* C++20
 * CMake 3.25
 * (Test Only) GoogleTest
 
 You can disable building tests by setting cmake option
-[`BEMAN_EXEMPLAR_BUILD_TESTS`](#beman_exemplar_build_tests) to `OFF`
+[`BEMAN_INDICES_VIEW_BUILD_TESTS`](#beman_indices_view_build_tests) to `OFF`
 when configuring the project.
-
-Even when tests are being built and run, some will not be compiled
-unless provided compiler support **C++20** or ranges capabilities enabled.
-
-> [!TIP]
->
-> In the logs you will be able to see if there are any examples that aren't enabled
-> due to compiler capabilities or the configured C++ version.
->
-> Below is an example:
->
-> ```txt
-> -- Looking for __cpp_lib_ranges
-> -- Looking for __cpp_lib_ranges - not found
-> CMake Warning at examples/CMakeLists.txt:12 (message):
->   Missing range support! Skip: identity_as_default_projection
->
->
-> Examples to be built: identity_direct_usage
-> ```
 
 ### Supported Platforms
 
@@ -127,7 +101,7 @@ This project officially supports:
 >
 > Versions outside of this range would likely work as well,
 > especially if you're using a version above the given range
-> (e.g. HEAD/ nightly).
+> (e.g. HEAD/nightly).
 > These development environments are verified using our CI configuration.
 
 ## Development
@@ -300,18 +274,18 @@ The precise version of GoogleTest that will be used is maintained in
 When configuring the project manually,
 you can pass an array of project specific CMake configs to customize your build.
 
-Project specific options are prefixed with `BEMAN_EXEMPLAR`.
+Project specific options are prefixed with `BEMAN_INDICES_VIEW`.
 You can see the list of available options with:
 
 ```bash
-cmake -LH | grep "BEMAN_EXEMPLAR" -C 2
+cmake -LH | grep "BEMAN_INDICES_VIEW" -C 2
 ```
 
 <details>
 
 <summary> Details of CMake arguments. </summary>
 
-#### `BEMAN_EXEMPLAR_BUILD_TESTS`
+#### `BEMAN_INDICES_VIEW_BUILD_TESTS`
 
 Enable building tests and test infrastructure. Default: ON.
 Values: { ON, OFF }.
@@ -319,7 +293,7 @@ Values: { ON, OFF }.
 You can configure the project to have this option turned off via:
 
 ```bash
-cmake -B build -S . -DCMAKE_CXX_STANDARD=20 -DBEMAN_EXEMPLAR_BUILD_TESTS=OFF
+cmake -B build -S . -DCMAKE_CXX_STANDARD=20 -DBEMAN_INDICES_VIEW_BUILD_TESTS=OFF
 ```
 
 > [!TIP]
@@ -328,67 +302,67 @@ cmake -B build -S . -DCMAKE_CXX_STANDARD=20 -DBEMAN_EXEMPLAR_BUILD_TESTS=OFF
 > disable building tests avoids the project from pulling Google Tests from
 > GitHub.
 
-#### `BEMAN_EXEMPLAR_BUILD_EXAMPLES`
+#### `BEMAN_INDICES_VIEW_BUILD_EXAMPLES`
 
 Enable building examples. Default: ON. Values: { ON, OFF }.
 
 </details>
 
-## Integrate beman.exemplar into your project
+## Integrate beman.indices_view into your project
 
-To use `beman.exemplar` in your C++ project,
-include an appropriate `beman.exemplar` header from your source code.
+To use `beman.indices_view` in your C++ project,
+include an appropriate `beman.indices_view` header from your source code.
 
 ```c++
-#include <beman/exemplar/identity.hpp>
+#include <beman/indices_view/indices.hpp>
 ```
 
 > [!NOTE]
 >
-> `beman.exemplar` headers are to be included with the `beman/exemplar/` directories prefixed.
+> `beman.indices_view` headers are to be included with the `beman/indices_view/` directories prefixed.
 > It is not supported to alter include search paths to spell the include target another way. For instance,
-> `#include <identity.hpp>` is not a supported interface.
+> `#include <indices.hpp>` is not a supported interface.
 
-How you will link your project against `beman.exemplar` will depend on your build system.
+How you will link your project against `beman.indices_view` will depend on your build system.
 CMake instructions are provided in following sections.
 
-### Linking your project to beman.exemplar with CMake
+### Linking your project to beman.indices_view with CMake
 
 For CMake based projects,
-you will need to use the `beman.exemplar` CMake module
-to define the `beman::exemplar` CMake target:
+you will need to use the `beman.indices_view` CMake module
+to define the `beman::indices_view` CMake target:
 
 ```cmake
-find_package(beman.exemplar REQUIRED)
+find_package(beman.indices_view REQUIRED)
 ```
 
-You will also need to add `beman::exemplar` to the link libraries of
-any libraries or executables that include beman.exemplar's header file.
+You will also need to add `beman::indices_view` to the link libraries of
+any libraries or executables that include beman.indices_view's header file.
 
 ```cmake
-target_link_libraries(yourlib PUBLIC beman::exemplar)
+target_link_libraries(yourlib PUBLIC beman::indices_view)
 ```
 
-### Produce beman.exemplar static library locally
+### Produce beman.indices_view static library locally
 
-You can include exemplar's headers locally
-by producing a static `libbeman.exemplar.a` library.
+You can include indices_view's headers locally
+by producing a static `libbeman.indices_view.a` library.
 
 ```bash
 cmake --workflow --preset gcc-release
-cmake --install build/gcc-release --prefix /opt/beman.exemplar
+cmake --install build/gcc-release --prefix /opt/beman.indices_view
 ```
 
-This will generate such directory structure at `/opt/beman.exemplar`.
+This will generate such directory structure at `/opt/beman.indices_view`.
 
 ```txt
-/opt/beman.exemplar
+/opt/beman.indices_view
 ├── include
 │   └── beman
-│       └── exemplar
-│           └── identity.hpp
+│       └── indices_view
+│           └── indices.hpp
 └── lib
-    └── libbeman.exemplar.a
+    └── libbeman.indices_view.a
 ```
 
 ## Contributing

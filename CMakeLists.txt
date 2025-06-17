@@ -30,9 +30,70 @@ option(
     ${PROJECT_IS_TOP_LEVEL}
 )
 
-include(CTest)
+include(GNUInstallDirs)
 
-add_subdirectory(src/beman/indices_view)
+add_library(beman.indices_view)
+add_library(beman::indices_view ALIAS beman.indices_view)
+
+target_sources(
+    beman.indices_view
+    PUBLIC
+        FILE_SET HEADERS
+        BASE_DIRS 
+            ${CMAKE_CURRENT_BINARY_DIR}/include
+            include
+        FILES
+            ${CMAKE_CURRENT_SOURCE_DIR}include/beman/indices_view/indices.hpp
+)
+
+set_target_properties(
+    beman.indices_view
+    PROPERTIES VERIFY_INTERFACE_HEADER_SETS ON EXPORT_NAME indices_view
+)
+
+install(
+    TARGETS beman.indices_view COMPONENT beman.indices_view
+    EXPORT beman.indices_view
+    DESTINATION
+    ${CMAKE_INSTALL_LIBDIR}$<$<CONFIG:Debug>:/debug>
+    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}$<$<CONFIG:Debug>:/debug>
+    FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+)
+
+if(BEMAN_INDICES_VIEW_INSTALL_CONFIG_FILE_PACKAGE)
+    include(CMakePackageConfigHelpers)
+
+    configure_package_config_file(
+        "${CMAKE_CURRENT_SOURCE_DIR}/beman.indices_view-config.cmake.in"
+        "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config.cmake"
+        INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/beman.indices_view"
+        PATH_VARS PROJECT_NAME PROJECT_VERSION
+    )
+
+    write_basic_package_version_file(
+        "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config-version.cmake"
+        VERSION ${PROJECT_VERSION}
+        COMPATIBILITY ExactVersion
+    )
+
+    install(
+        FILES
+            "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config.cmake"
+            "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config-version.cmake"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/beman.indices_view"
+        COMPONENT beman.indices_view
+    )
+
+    install(
+        EXPORT beman.indices_view
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/beman.indices_view"
+        NAMESPACE beman::
+        FILE beman.indices_view-targets.cmake
+        COMPONENT beman.indices_view
+    )
+endif()
+
+include(CTest)
 
 if(BEMAN_INDICES_VIEW_BUILD_TESTS)
     add_subdirectory(tests/beman/indices_view)

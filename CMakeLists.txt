@@ -32,7 +32,7 @@ option(
 
 include(GNUInstallDirs)
 
-add_library(beman.indices_view)
+add_library(beman.indices_view INTERFACE)
 add_library(beman::indices_view ALIAS beman.indices_view)
 
 target_sources(
@@ -43,7 +43,7 @@ target_sources(
             ${CMAKE_CURRENT_BINARY_DIR}/include
             include
         FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}include/beman/indices_view/indices.hpp
+            ${CMAKE_CURRENT_SOURCE_DIR}/include/beman/indices_view/indices.hpp
 )
 
 set_target_properties(
@@ -62,13 +62,6 @@ install(
 
 if(BEMAN_INDICES_VIEW_INSTALL_CONFIG_FILE_PACKAGE)
     include(CMakePackageConfigHelpers)
-
-    configure_package_config_file(
-        "${CMAKE_CURRENT_SOURCE_DIR}/beman.indices_view-config.cmake.in"
-        "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config.cmake"
-        INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/beman.indices_view"
-        PATH_VARS PROJECT_NAME PROJECT_VERSION
-    )
 
     write_basic_package_version_file(
         "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config-version.cmake"

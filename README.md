@@ -5,11 +5,11 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 -->
 
 <!-- markdownlint-disable-next-line line-length -->
-![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_under_development.svg) ![Continuous Integration Tests](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit.yml/badge.svg)
+![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_stable_api.svg) ![Continuous Integration Tests](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit.yml/badge.svg)
 
 **Implements**: `std::views::indices` proposed in [Add std::views::indices(n) (P3060R2)](https://wg21.link/P3060R2).
 
-**Status**: [Under development and not yet ready for production use.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#under-development-and-not-yet-ready-for-production-use)
+**Status**: [Production ready. Stable API.](https://github.com/bemanproject/beman/blob/main/docs/BEMAN_LIBRARY_MATURITY_MODEL.md#production-ready-stable-api)
 
 ## Usage
 

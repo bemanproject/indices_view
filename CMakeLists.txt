@@ -39,11 +39,8 @@ target_sources(
     beman.indices_view
     PUBLIC
         FILE_SET HEADERS
-        BASE_DIRS 
-            ${CMAKE_CURRENT_BINARY_DIR}/include
-            include
-        FILES
-            ${CMAKE_CURRENT_SOURCE_DIR}/include/beman/indices_view/indices.hpp
+        BASE_DIRS ${CMAKE_CURRENT_BINARY_DIR}/include include
+        FILES ${CMAKE_CURRENT_SOURCE_DIR}/include/beman/indices_view/indices.hpp
 )
 
 set_target_properties(

@@ -5,16 +5,13 @@
 
 #include <concepts>
 #include <ranges>
-// #include <vector>
-
-// #include <fmt/ranges.h>
-#include <print>
 
 namespace beman::indices_view {
 
 #if defined(_LIBCPP_VERSION)
+#include <__iterator/concepts.h>
 template <class _Ty>
-concept _Integer_like = __libcpp_integer<_Ty>;
+concept _Integer_like = __integer_like<_Ty>;
 #elif defined(__GLIBCXX__)
 #include <bits/iterator_concepts.h>
 template <class _Ty>
@@ -26,6 +23,7 @@ concept _Integer_like = std::_Integer_like<_Ty>;
 #endif
 
 inline constexpr auto indices = []<_Integer_like I>(I n) { return std::views::iota(I{}, n); };
+
 } // namespace beman::indices_view
 
 #endif // BEMAN_INDICES_VIEW_INDICES_HPP

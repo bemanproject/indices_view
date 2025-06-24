@@ -15,7 +15,7 @@ concept _Integer_like = __integer_like<_Ty>;
 #elif defined(__GLIBCXX__)
 #include <bits/iterator_concepts.h>
 template <class _Ty>
-concept _Integer_like = __detail::__is_integer_like<_Ty>;
+concept _Integer_like = std::ranges::__detail::__is_integer_like<_Ty>;
 #elif defined(_MSC_VER) && defined(_MSVC_STL_UPDATE)
 #include <__msvc_iter_core.hpp>
 template <class _Ty>

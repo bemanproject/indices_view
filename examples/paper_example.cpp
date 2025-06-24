@@ -12,7 +12,9 @@ int main() {
     std::cout << "[";
     bool first = true;
     for (auto i : biv::indices(std::ranges::size(rng))) {
-        if (!first) std::cout << ", ";
+        if (!first) {
+            std::cout << ", ";
+        }
         std::cout << i;
         first = false;
     }

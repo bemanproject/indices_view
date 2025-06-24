@@ -13,60 +13,26 @@ SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 
 ## Usage
 
-Its direct usage is usually not needed.
-
-### Usage: default projection in constrained algorithms
-
-The following code snippet illustrates how we can achieve a default projection using `beman::exemplar::identity`:
-
 ```cpp
-// TODO: Update example
-#include <beman/exemplar/identity.hpp>
+#include <iostream>
+#include <vector>
 
-namespace exe = beman::exemplar;
+#include <beman/indices_view/indices.hpp>
 
-// Class with a pair of values.
-struct Pair
-{
-    int n;
-    std::string s;
+namespace biv = beman::indices_view;
 
-    // Output the pair in the form {n, s}.
-    // Used by the range-printer if no custom projection is provided (default: identity projection).
-    friend std::ostream &operator<<(std::ostream &os, const Pair &p)
-    {
-        return os << "Pair" << '{' << p.n << ", " << p.s << '}';
+// Example given in the paper for `std::views::indices`, adapted to work with C++20.
+int main() {
+    std::vector rng(5, 0);
+
+    std::cout << "[";
+    bool first = true;
+    for (auto i : biv::indices(std::ranges::size(rng))) {
+        if (!first) std::cout << ", ";
+        std::cout << i;
+        first = false;
     }
-};
-
-// A range-printer that can print projected (modified) elements of a range.
-// All the elements of the range are printed in the form {element1, element2, ...}.
-// e.g., pairs with identity: Pair{1, one}, Pair{2, two}, Pair{3, three}
-// e.g., pairs with custom projection: {1:one, 2:two, 3:three}
-template <std::ranges::input_range R,
-          typename Projection>
-void print(const std::string_view rem, R &&range, Projection projection = exe::identity>)
-{
-    std::cout << rem << '{';
-    std::ranges::for_each(
-        range,
-        [O = 0](const auto &o) mutable
-        { std::cout << (O++ ? ", " : "") << o; },
-        projection);
-    std::cout << "}\n";
-};
-
-int main()
-{
-    // A vector of pairs to print.
-    const std::vector<Pair> pairs = {
-        {1, "one"},
-        {2, "two"},
-        {3, "three"},
-    };
-
-    // Print the pairs using the default projection.
-    print("\tpairs with beman: ", pairs);
+    std::cout << "]\n";
 
     return 0;
 }

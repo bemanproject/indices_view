@@ -11,7 +11,7 @@ namespace beman::indices_view {
 #if defined(_LIBCPP_VERSION)
 #include <__iterator/concepts.h>
 template <class _Ty>
-concept _Integer_like = __integer_like<_Ty>;
+concept _Integer_like = std::__integer_like<_Ty>;
 #elif defined(__GLIBCXX__)
 #include <bits/iterator_concepts.h>
 template <class _Ty>

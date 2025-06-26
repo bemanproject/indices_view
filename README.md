@@ -53,7 +53,7 @@ This project requires at least the following to build:
 * CMake 3.25
 * (Test Only) GoogleTest
 
-You can disable building tests by setting cmake option
+You can disable building tests by setting the CMake option
 [`BEMAN_INDICES_VIEW_BUILD_TESTS`](#beman_indices_view_build_tests) to `OFF`
 when configuring the project.
 

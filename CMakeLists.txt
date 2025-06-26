@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.25)
 project(
     beman.indices_view # CMake Project Name, which is also the name of the top-level
     # targets (e.g., library, executable, etc.).
-    DESCRIPTION "An implementation of std::views::indices "
+    DESCRIPTION "An implementation of std::views::indices (P3060R2)."
     LANGUAGES CXX
     VERSION 0.0.1
 )
@@ -60,26 +60,33 @@ install(
 if(BEMAN_INDICES_VIEW_INSTALL_CONFIG_FILE_PACKAGE)
     include(CMakePackageConfigHelpers)
 
+    configure_package_config_file(
+        "${PROJECT_SOURCE_DIR}/cmake/${PROJECT_NAME}-config.cmake.in"
+        "${PROJECT_BINARY_DIR}/cmake/${PROJECT_NAME}/${PROJECT_NAME}-config.cmake"
+        INSTALL_DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+        PATH_VARS PROJECT_NAME PROJECT_VERSION
+    )
+
     write_basic_package_version_file(
-        "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config-version.cmake"
+        "${PROJECT_BINARY_DIR}/cmake/${PROJECT_NAME}/${PROJECT_NAME}-version.cmake"
         VERSION ${PROJECT_VERSION}
         COMPATIBILITY ExactVersion
     )
 
     install(
         FILES
-            "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config.cmake"
-            "${CMAKE_CURRENT_BINARY_DIR}/beman.indices_view-config-version.cmake"
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/beman.indices_view"
-        COMPONENT beman.indices_view
+            "${PROJECT_BINARY_DIR}/cmake/${PROJECT_NAME}/${PROJECT_NAME}-config.cmake"
+            "${PROJECT_BINARY_DIR}/cmake/${PROJECT_NAME}/${PROJECT_NAME}-version.cmake"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
+        COMPONENT development
     )
 
     install(
         EXPORT beman.indices_view
-        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/beman.indices_view"
+        DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}"
         NAMESPACE beman::
-        FILE beman.indices_view-targets.cmake
-        COMPONENT beman.indices_view
+        FILE ${PROJECT_NAME}-targets.cmake
+        COMPONENT development
     )
 endif()
 

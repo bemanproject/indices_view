@@ -3,7 +3,6 @@
 #ifndef BEMAN_INDICES_VIEW_INDICES_HPP
 #define BEMAN_INDICES_VIEW_INDICES_HPP
 
-#include <concepts>
 #include <ranges>
 
 namespace beman::indices_view {

@@ -95,7 +95,7 @@ jobs:
               ${{ matrix.cmake_args.description }}"
     runs-on: ${{ matrix.platform.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Install Ninja
         uses: lukka/get-cmake@latest
         with:
@@ -170,7 +170,7 @@ jobs:
             toolchain: "infra/cmake/llvm-toolchain.cmake"
     name: "Compiler: ${{ matrix.compilers.class }} ${{ matrix.compilers.version }}"
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Setup build environment
         uses: lukka/get-cmake@latest
         with:

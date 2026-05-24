@@ -4,8 +4,13 @@
 SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 -->
 
-<!-- markdownlint-disable-next-line line-length -->
-![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_stable_api.svg) ![Continuous Integration Tests](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit-check.yml/badge.svg) [![Coverage](https://coveralls.io/repos/github/bemanproject/indices_view/badge.svg?branch=main)](https://coveralls.io/github/bemanproject/indices_view?branch=main) ![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp26.svg)
+<!-- markdownlint-disable line-length -->
+[![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_stable_api.svg)](https://github.com/bemanproject/beman/blob/main/docs/beman_library_maturity_model.md#the-beman-library-maturity-model)
+[![Continuous Integration Tests](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml/badge.svg)](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml)
+[![Lint Check (pre-commit)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit-check.yml/badge.svg)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit-check.yml)
+[![Coverage](https://coveralls.io/repos/github/bemanproject/indices_view/badge.svg?branch=main)](https://coveralls.io/github/bemanproject/indices_view?branch=main)
+![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp26.svg)
+<!-- markdownlint-restore -->
 
 **Implements**: `std::views::indices` proposed in [Add std::views::indices(n) (P3060R2)](https://wg21.link/P3060R2).
 
@@ -167,9 +172,3 @@ include an appropriate `beman.indices_view` header from your source code.
 ```c++
 #include <beman/indices_view/indices.hpp>
 ```
-
-> [!NOTE]
->
-> `beman.indices_view` headers are to be included with the `beman/indices_view/` prefix.
-> Altering include search paths to spell the include target another way (e.g.
-> `#include <indices.hpp>`) is unsupported.

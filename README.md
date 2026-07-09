@@ -4,8 +4,14 @@
 SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 -->
 
-<!-- markdownlint-disable-next-line line-length -->
-![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_stable_api.svg) ![Continuous Integration Tests](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml/badge.svg) ![Lint Check (pre-commit)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit-check.yml/badge.svg) [![Coverage](https://coveralls.io/repos/github/bemanproject/indices_view/badge.svg?branch=main)](https://coveralls.io/github/bemanproject/indices_view?branch=main) ![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp26.svg) [![Compiler Explorer Example](https://img.shields.io/badge/Try%20it%20on%20Compiler%20Explorer-grey?logo=compilerexplorer&logoColor=67c52a)](https://godbolt.org/z/6cxfs8haa)
+<!-- markdownlint-disable line-length -->
+[![Library Status](https://raw.githubusercontent.com/bemanproject/beman/refs/heads/main/images/badges/beman_badge-beman_library_production_ready_stable_api.svg)](https://github.com/bemanproject/beman/blob/main/docs/beman_library_maturity_model.md#the-beman-library-maturity-model)
+[![Continuous Integration Tests](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml/badge.svg)](https://github.com/bemanproject/indices_view/actions/workflows/ci_tests.yml)
+[![Lint Check (pre-commit)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit-check.yml/badge.svg)](https://github.com/bemanproject/indices_view/actions/workflows/pre-commit-check.yml)
+[![Coverage](https://coveralls.io/repos/github/bemanproject/indices_view/badge.svg?branch=main)](https://coveralls.io/github/bemanproject/indices_view?branch=main)
+![Standard Target](https://github.com/bemanproject/beman/blob/main/images/badges/cpp26.svg)
+[![Compiler Explorer Example](https://img.shields.io/badge/Try%20it%20on%20Compiler%20Explorer-grey?logo=compilerexplorer&logoColor=67c52a)](https://godbolt.org/z/6cxfs8haa)
+<!-- markdownlint-restore -->
 
 **Implements**: `std::views::indices` proposed in [Add std::views::indices(n) (P3060R2)](https://wg21.link/P3060R2).
 
@@ -64,7 +70,7 @@ You can disable building tests by setting CMake option `BEMAN_INDICES_VIEW_BUILD
 
 | Compiler   | Version | C++ Standards | Standard Library  |
 |------------|---------|---------------|-------------------|
-| GCC        | 15-13   | C++26-C++20   | libstdc++         |
+| GCC        | 16-13   | C++26-C++20   | libstdc++         |
 | GCC        | 12-11   | C++23, C++20  | libstdc++         |
 | Clang      | 22-19   | C++26-C++20   | libstdc++, libc++ |
 | Clang      | 18      | C++26-C++20   | libc++            |
@@ -98,6 +104,17 @@ For details on building beman.indices_view without using a CMake preset, refer t
 [Contributing Guidelines](CONTRIBUTING.md).
 
 ### Installation
+
+#### Vcpkg
+
+The preferred way to install indices_view is via vcpkg. To do so, after installing vcpkg
+itself, you need to add support for the Beman project's [vcpkg
+registry](https://github.com/bemanproject/vcpkg-registry) by configuring a
+`vcpkg-configuration.json` file (which indices_view [provides](vcpkg-configuration.json)).
+
+Then, simply run `vcpkg install beman-indices-view`.
+
+#### Manual
 
 To install beman.indices_view globally after building with the `gcc-release` preset, you can
 run:
@@ -156,9 +173,3 @@ include an appropriate `beman.indices_view` header from your source code.
 ```c++
 #include <beman/indices_view/indices.hpp>
 ```
-
-> [!NOTE]
->
-> `beman.indices_view` headers are to be included with the `beman/indices_view/` prefix.
-> Altering include search paths to spell the include target another way (e.g.
-> `#include <indices.hpp>`) is unsupported.
